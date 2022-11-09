@@ -1,0 +1,39 @@
+<!doctype html>
+<script>
+
+/* Напишите функцию aclean(arr), которая возвращает массив слов, очищенный от анаграмм.
+Из каждой группы анаграмм должно остаться только одно слово, не важно какое. */
+
+    function aclean(arr) {
+        let set1 = new Set();
+        let set2 = new Set();
+
+        for (let i = 0; i < arr.length; i++) { 
+            for (let j = i + 1; j < arr.length; j++) { 
+            
+                for(let letter of arr[i].toLowerCase().split('') ) {
+                    set1.add(letter);
+                    set2.add(letter);
+                }
+                
+                for (let letter1 of arr[j].toLowerCase().split('') ) {
+                    set2.add(letter1);
+                }
+                
+                if ((set1.size == set2.size) && (arr[i].length == arr[j].length))  {
+                    arr.splice(j, 1);
+                    j--;
+                    set2.clear();
+                }
+                set2.clear();
+            }
+            set1.clear();
+        }
+    return arr;
+    }   
+
+    let arr = ["nap", "teachers", "cheaters", "PAN", "ear", "era", "hectares"];
+
+    alert( aclean(arr) );
+
+</script>
